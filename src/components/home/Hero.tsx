@@ -105,10 +105,6 @@ export default function Hero() {
                     {service.description}
                   </p>
                 </div>
-                <div className="mt-3 pt-2.5 border-t border-gray-700/50 flex items-center justify-center text-[11px] text-gray-400 font-medium group-hover:text-white transition-colors">
-                  <CircleCheck className="w-3.5 h-3.5 text-green-500 mr-1.5" />
-                  <span>DeutPak B2B Service</span>
-                </div>
               </div>
             ))}
           </div>
