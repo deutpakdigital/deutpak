@@ -12,10 +12,10 @@ import { useInView } from "@/hooks/useInView";
  * Each advantage can use a different image per language (useful when the artwork has text in it).
  */
 const ADVANTAGE_IMAGES = [
-  { en: "/images/slider/slide-4.jpg", de: "/images/slider/slide-4.jpg" },
-  { en: "/images/slider/slide-5.jpg", de: "/images/slider/slide-5.jpg" },
-  { en: "/images/slider/slide-3.jpg", de: "/images/slider/slide-3.jpg" },
-  { en: "/images/slider/slide-2.jpg", de: "/images/slider/slide-2.jpg" },
+  { en: "/images/Adv 1.jpg", de: "/images/Adv 1.jpg" },
+  { en: "/images/Adv 2.jpg", de: "/images/Adv 2.jpg" },
+  { en: "/images/Adv 3.jpg", de: "/images/Adv 3.jpg" },
+  { en: "/images/Adv 4.jpg", de: "/images/Adv 4.jpg" },
 ];
 
 const AUTOPLAY_MS = 7000;

@@ -14,7 +14,7 @@ const config: Config = {
           to: { opacity: "1", transform: "translateY(0)" },
         },
         progress: { from: { transform: "scaleX(0)" }, to: { transform: "scaleX(1)" } },
-        "ken-burns": { from: { transform: "scale(1.1)" }, to: { transform: "scale(1)" } },
+        "ken-burns": { from: { transform: "scale(1.04)" }, to: { transform: "scale(1)" } },
       },
       animation: {
         "fade-in": "fade-in 0.3s ease-out",
