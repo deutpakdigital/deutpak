@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Gallery from "@/components/home/Gallery";
 import Hero from "@/components/home/Hero";
 import HowItWorks from "@/components/home/HowItWorks";
 import ScrollToHash from "@/components/home/ScrollToHash";
@@ -14,6 +15,7 @@ export default function HomePage() {
         <Hero />
         <WhyChooseUs />
         <HowItWorks />
+        <Gallery />
         <Footer />
       </main>
     </div>
