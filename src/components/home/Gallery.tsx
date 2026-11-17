@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Expand, Images, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInView } from "@/hooks/useInView";
+import { SectionBadge, sectionLead, sectionTitle } from "./SectionHeading";
 
 type Item = { src: string; caption: string; span: string };
 
@@ -123,7 +124,7 @@ function Lightbox({
               aria-label={thumb.caption}
               aria-current={i === index}
               className={`relative w-20 h-14 rounded-lg overflow-hidden transition-all ${
-                i === index ? "ring-2 ring-amber-400 opacity-100" : "opacity-50 hover:opacity-90"
+                i === index ? "ring-2 ring-gold-400 opacity-100" : "opacity-50 hover:opacity-90"
               }`}
             >
               <Image src={thumb.src} alt="" fill sizes="80px" className="object-cover" />
@@ -172,13 +173,10 @@ export default function Gallery() {
   return (
     <section id="gallery" className="relative bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 scroll-mt-16">
       <div className="max-w-7xl mx-auto">
-        <div ref={headerRef} className={`max-w-2xl mx-auto text-center mb-12 lg:mb-16 ${reveal(headerInView)}`}>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 ring-1 ring-green-100 text-green-700 text-xs font-semibold uppercase tracking-wider mb-4">
-            <Images className="w-3.5 h-3.5 text-green-600" />
-            <span>{t.galleryBadge}</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-4 hyphens-auto [overflow-wrap:anywhere]">{t.galleryHeader}</h2>
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed">{t.gallerySubHeader}</p>
+        <div ref={headerRef} className={`max-w-3xl mx-auto text-center mb-12 lg:mb-16 ${reveal(headerInView)}`}>
+          <SectionBadge>{t.galleryBadge}</SectionBadge>
+          <h2 className={`${sectionTitle} mb-4`}>{t.galleryHeader}</h2>
+          <p className={sectionLead}>{t.gallerySubHeader}</p>
         </div>
 
         <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -192,7 +190,7 @@ export default function Gallery() {
               onClick={() => setOpen(i)}
               aria-label={`${t.galleryOpen}: ${item.caption}`}
               style={{ transitionDelay: gridInView ? `${i * 80}ms` : "0ms" }}
-              className={`group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-500 ${item.span} ${reveal(gridInView)}`}
+              className={`group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-500 ${item.span} ${reveal(gridInView)}`}
             >
               <Image
                 src={item.src}
@@ -202,7 +200,7 @@ export default function Gallery() {
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <span className="absolute inset-0 bg-gradient-to-t from-gray-950/75 via-gray-950/0 via-45% to-transparent transition-opacity duration-500 group-hover:from-gray-950/90" />
-              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-white/90 text-gray-900 text-[11px] sm:text-xs font-bold tabular-nums shadow-sm">
+              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-white/90 text-brand-700 text-[11px] sm:text-xs font-bold tabular-nums shadow-sm">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="absolute left-3 right-3 bottom-3 sm:left-4 sm:right-4 sm:bottom-4 flex items-end justify-between gap-2 text-left">
