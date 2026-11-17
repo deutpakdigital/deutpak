@@ -2,9 +2,10 @@
 
 import { Fragment, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { Award, Car, CircleCheckBig, Handshake, Headset, Settings2, TrendingUp, Wrench } from "lucide-react";
+import { Award, Car, Handshake, Headset, Settings2, TrendingUp, Wrench } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInView } from "@/hooks/useInView";
+import { SectionBadge, cardText, cardTitle, sectionBody, sectionLead, sectionTitle } from "./SectionHeading";
 
 /**
  * Images for the four advantages, in order. To swap them, replace these paths.
@@ -47,9 +48,9 @@ function PartnershipModel() {
   return (
     <div
       ref={ref}
-      className="mt-12 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 via-white to-amber-50 p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12"
+      className="mt-12 rounded-3xl border border-brand-100 bg-gradient-to-r from-brand-50 via-white to-gold-50 p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12"
     >
-      <span className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-green-700">{t.whyChooseModelBadge}</span>
+      <span className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-brand-700">{t.whyChooseModelBadge}</span>
       <ol className="flex-1 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-0">
         {steps.map(({ icon: Icon, label }, i) => (
           <Fragment key={label}>
@@ -57,7 +58,7 @@ function PartnershipModel() {
               <li aria-hidden className="hidden sm:block flex-1 mx-4 h-px bg-gray-200 overflow-hidden">
                 <span
                   style={{ transitionDelay: `${i * 300}ms` }}
-                  className={`block h-full bg-gradient-to-r from-green-500 to-amber-400 origin-left transition-transform duration-700 ease-out motion-reduce:transition-none ${
+                  className={`block h-full bg-gradient-to-r from-brand-600 to-gold-400 origin-left transition-transform duration-700 ease-out motion-reduce:transition-none ${
                     inView ? "scale-x-100" : "scale-x-0"
                   }`}
                 />
@@ -71,7 +72,7 @@ function PartnershipModel() {
             >
               <span
                 className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ring-1 ${
-                  i === steps.length - 1 ? "bg-green-600 text-white ring-green-600" : "bg-white text-green-700 ring-green-100"
+                  i === steps.length - 1 ? "bg-brand-700 text-white ring-brand-700" : "bg-white text-brand-700 ring-brand-100"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -114,24 +115,19 @@ export default function WhyChooseUs() {
 
   return (
     <section id="aboutUs" className="relative overflow-hidden bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-gray-100 scroll-mt-16">
-      <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-green-100/60 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 w-[28rem] h-[28rem] rounded-full bg-amber-100/50 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-brand-100/60 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 w-[28rem] h-[28rem] rounded-full bg-gold-100/60 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Intro */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 lg:items-end">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 ring-1 ring-green-100 text-green-700 text-xs font-semibold uppercase tracking-wider mb-4">
-              <CircleCheckBig className="w-3.5 h-3.5 text-green-600" />
-              <span>{t.aboutBadge}</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.1]">
-              {t.whyChooseDeutPakHeader}
-            </h2>
+            <SectionBadge>{t.aboutBadge}</SectionBadge>
+            <h2 className={sectionTitle}>{t.whyChooseDeutPakHeader}</h2>
           </Reveal>
           <Reveal delay={120} className="space-y-4">
-            <p className="text-gray-700 text-base sm:text-lg leading-relaxed">{t.whyChooseDeutPakSubHeader}</p>
-            <p className="text-gray-500 text-base leading-relaxed">{t.whyChooseDeutPakSubHeader2}</p>
+            <p className={sectionLead}>{t.whyChooseDeutPakSubHeader}</p>
+            <p className={sectionBody}>{t.whyChooseDeutPakSubHeader2}</p>
           </Reveal>
         </div>
 
@@ -168,20 +164,20 @@ export default function WhyChooseUs() {
                         onClick={() => setActive(i)}
                         aria-expanded={isActive}
                         aria-controls={panelId}
-                        className="w-full flex items-center gap-4 p-5 text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+                        className="w-full flex items-center gap-4 p-5 text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
                       >
                         <span
                           className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                            isActive ? "bg-green-600 text-white scale-105 shadow-lg shadow-green-600/30" : "bg-gray-100 text-gray-500"
+                            isActive ? "bg-brand-700 text-white scale-105 shadow-lg shadow-brand-700/30" : "bg-gray-100 text-gray-500"
                           }`}
                         >
                           <Icon className="w-5 h-5" />
                         </span>
                         <span className="flex-1">
-                          <span className={`block text-xs font-bold tracking-widest mb-0.5 transition-colors ${isActive ? "text-amber-500" : "text-gray-400"}`}>
+                          <span className={`block text-xs font-bold tracking-widest mb-0.5 transition-colors ${isActive ? "text-gold-600" : "text-gray-400"}`}>
                             {String(i + 1).padStart(2, "0")}
                           </span>
-                          <span className={`block text-base sm:text-lg font-bold leading-snug transition-colors ${isActive ? "text-gray-900" : "text-gray-600"}`}>
+                          <span className={`block ${cardTitle} transition-colors ${isActive ? "text-gray-900" : "text-gray-600"}`}>
                             {title}
                           </span>
                         </span>
@@ -194,17 +190,17 @@ export default function WhyChooseUs() {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <p className="px-5 pb-5 sm:pl-[5.25rem] text-sm sm:text-[15px] text-gray-600 leading-relaxed">{description}</p>
+                        <p className={`px-5 pb-5 sm:pl-[5.25rem] ${cardText}`}>{description}</p>
                         <div className="mx-5 mb-4 h-1 rounded-full bg-gray-100 overflow-hidden">
                           {isActive &&
                             (autoplay ? (
                               <span
-                                className="block h-full rounded-full bg-gradient-to-r from-green-500 to-amber-400 origin-left animate-progress"
+                                className="block h-full rounded-full bg-gradient-to-r from-brand-600 to-gold-400 origin-left animate-progress"
                                 style={{ animationDuration: `${AUTOPLAY_MS}ms`, animationPlayState: paused ? "paused" : "running" }}
                                 onAnimationEnd={next}
                               />
                             ) : (
-                              <span className="block h-full rounded-full bg-gradient-to-r from-green-500 to-amber-400" />
+                              <span className="block h-full rounded-full bg-gradient-to-r from-brand-600 to-gold-400" />
                             ))}
                         </div>
                       </div>
@@ -219,11 +215,11 @@ export default function WhyChooseUs() {
             <div className="relative">
               <div
                 aria-hidden
-                className="absolute -inset-3 sm:-inset-5 rounded-[2rem] bg-gradient-to-tr from-green-200/70 via-transparent to-amber-200/70 blur-2xl"
+                className="absolute -inset-3 sm:-inset-5 rounded-[2rem] bg-gradient-to-tr from-brand-200/70 via-transparent to-gold-200/70 blur-2xl"
               />
               <div
                 aria-hidden
-                className="hidden sm:block absolute -top-6 -right-6 w-28 h-28 opacity-60 [background-image:radial-gradient(#16a34a_1.5px,transparent_1.5px)] [background-size:14px_14px]"
+                className="hidden sm:block absolute -top-6 -right-6 w-28 h-28 opacity-60 [background-image:radial-gradient(theme(colors.brand.700)_1.5px,transparent_1.5px)] [background-size:14px_14px]"
               />
 
               <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5 bg-gray-100">
