@@ -85,7 +85,7 @@ function Lightbox({
         }}
       >
         <div key={index} className="absolute inset-0 animate-fade-in" onClick={(e) => e.stopPropagation()}>
-          <Image src={item.src} alt={item.caption} fill sizes="100vw" className="object-contain" priority />
+          <Image src={item.src} alt={item.caption} fill sizes="100vw" className="object-contain" loading="eager" />
         </div>
       </div>
 
@@ -142,17 +142,19 @@ export default function Gallery() {
   const [gridRef, gridInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Bento layout: on both the 2-column (mobile) and 4-column (desktop) grid these spans tile with no gaps.
+  // Shown in file order (1 → 8). On desktop the rows hold 3, 2, then 3 photos (6-column grid);
+  // on mobile it is a plain 2-column grid. THIRD/HALF set a tile's desktop width.
+  const THIRD = "lg:col-span-2";
+  const HALF = "lg:col-span-3 lg:aspect-[16/10]";
   const items: Item[] = [
-  // Wide (col-span-2) tiles crop top and bottom, so they hold the wide parking shots; the group photo gets a large tile.
-    { src: "/images/gallery/1.jpeg", caption: t.galleryCaption1, span: "col-span-2 row-span-2" },
-    { src: "/images/gallery/7.jpeg", caption: t.galleryCaption7, span: "col-span-2" },
-    { src: "/images/gallery/2.jpeg", caption: t.galleryCaption2, span: "" },
-    { src: "/images/gallery/4.jpeg", caption: t.galleryCaption4, span: "" },
-    { src: "/images/gallery/5.jpeg", caption: t.galleryCaption5, span: "" },
-    { src: "/images/gallery/6.jpeg", caption: t.galleryCaption6, span: "" },
-    { src: "/images/gallery/3.jpeg", caption: t.galleryCaption3, span: "col-span-2 row-span-2" },
-    { src: "/images/gallery/8.jpeg", caption: t.galleryCaption8, span: "col-span-2" },
+    { src: "/images/gallery/1 Office-Entrance.jpeg", caption: t.galleryCaption1, span: THIRD },
+    { src: "/images/gallery/2 Reception.jpeg", caption: t.galleryCaption2, span: THIRD },
+    { src: "/images/gallery/3 Opening Ceremony.jpeg", caption: t.galleryCaption3, span: THIRD },
+    { src: "/images/gallery/4 Opening Ceremony.jpeg", caption: t.galleryCaption4, span: HALF },
+    { src: "/images/gallery/5 Parking Entrance.jpeg", caption: t.galleryCaption5, span: HALF },
+    { src: "/images/gallery/6 Parking Area.jpeg", caption: t.galleryCaption6, span: THIRD },
+    { src: "/images/gallery/7 Parking Area.jpeg", caption: t.galleryCaption7, span: THIRD },
+    { src: "/images/gallery/8 Vehicle Preparing Area.jpeg", caption: t.galleryCaption8, span: THIRD },
   ];
 
   const close = useCallback(() => {
@@ -175,11 +177,11 @@ export default function Gallery() {
             <Images className="w-3.5 h-3.5 text-green-600" />
             <span>{t.galleryBadge}</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">{t.galleryHeader}</h2>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-4 hyphens-auto [overflow-wrap:anywhere]">{t.galleryHeader}</h2>
           <p className="text-gray-600 text-base sm:text-lg leading-relaxed">{t.gallerySubHeader}</p>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 auto-rows-[150px] sm:auto-rows-[200px] lg:auto-rows-[230px] gap-3 sm:gap-4">
+        <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
           {items.map((item, i) => (
             <button
               key={item.src}
@@ -190,19 +192,22 @@ export default function Gallery() {
               onClick={() => setOpen(i)}
               aria-label={`${t.galleryOpen}: ${item.caption}`}
               style={{ transitionDelay: gridInView ? `${i * 80}ms` : "0ms" }}
-              className={`group relative overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-500 ${item.span} ${reveal(gridInView)}`}
+              className={`group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-500 ${item.span} ${reveal(gridInView)}`}
             >
               <Image
                 src={item.src}
                 alt={item.caption}
                 fill
-                sizes={item.span.includes("col-span-2") ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
+                sizes={item.span === HALF ? "(min-width: 1024px) 50vw, 50vw" : "(min-width: 1024px) 33vw, 50vw"}
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-gray-950/10 to-transparent opacity-70 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <span className="absolute left-3 right-3 bottom-3 sm:left-4 sm:bottom-4 flex items-end justify-between gap-2 text-left sm:translate-y-2 sm:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+              <span className="absolute inset-0 bg-gradient-to-t from-gray-950/75 via-gray-950/0 via-45% to-transparent transition-opacity duration-500 group-hover:from-gray-950/90" />
+              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-white/90 text-gray-900 text-[11px] sm:text-xs font-bold tabular-nums shadow-sm">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="absolute left-3 right-3 bottom-3 sm:left-4 sm:right-4 sm:bottom-4 flex items-end justify-between gap-2 text-left">
                 <span className="text-white text-sm sm:text-base font-semibold leading-snug drop-shadow">{item.caption}</span>
-                <span className="hidden sm:flex shrink-0 w-9 h-9 rounded-full bg-white/15 backdrop-blur ring-1 ring-white/25 items-center justify-center text-white">
+                <span className="hidden sm:flex shrink-0 w-9 h-9 rounded-full bg-white/15 backdrop-blur ring-1 ring-white/25 items-center justify-center text-white opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
                   <Expand className="w-4 h-4" />
                 </span>
               </span>

@@ -240,7 +240,6 @@ export default function WhyChooseUs() {
                         alt={title}
                         fill
                         sizes="(min-width: 1024px) 58vw, 100vw"
-                        priority={i === 0}
                         className={`object-cover ${isActive && autoplay ? "animate-ken-burns" : ""}`}
                       />
                     </div>
