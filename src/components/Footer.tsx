@@ -22,30 +22,32 @@ const languages: { code: Language; label: string }[] = [
 ];
 
 const heading = "text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 mb-6";
-const link = "text-[15px] font-medium text-gray-200 hover:text-amber-300 transition-colors";
+const link = "text-[15px] font-medium text-gray-800 hover:text-brand-700 transition-colors";
 
-/** Full-width "DEUTPAK" wordmark: gold "DEUT", green "PAK", like the logo. */
+/** Full-width "DEUTPAK" wordmark: gold "DEUT", green "PAK", in the logo colours used across the app. */
 function Wordmark() {
   // It sits at the very bottom of the page, so it can only ever reach the bottom edge of the viewport.
   const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1, rootMargin: "0px" });
   return (
     <div ref={ref} aria-hidden className="relative overflow-hidden select-none">
+      {/* The letters run from y≈6 to the baseline at y=160; a viewBox 140 tall cuts off roughly their bottom eighth,
+          so the word looks like it sinks below the bottom edge of the page. */}
       <svg
-        viewBox="0 0 1000 150"
+        viewBox="0 0 1000 140"
         className={`block w-full h-auto font-sans font-black transition-all duration-1000 ease-out motion-reduce:transition-none motion-reduce:translate-y-0 motion-reduce:opacity-100 ${
           inView ? "translate-y-0 opacity-100" : "translate-y-1/3 opacity-0"
         }`}
       >
         <defs>
           <linearGradient id="wordmark-gold" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#fde68a" />
-            <stop offset="55%" stopColor="#f2b84b" />
-            <stop offset="100%" stopColor="#b7791f" />
+            <stop offset="0%" className="[stop-color:theme(colors.gold.300)]" />
+            <stop offset="55%" className="[stop-color:theme(colors.gold.400)]" />
+            <stop offset="100%" className="[stop-color:theme(colors.gold.600)]" />
           </linearGradient>
           <linearGradient id="wordmark-green" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#6ee7b7" />
-            <stop offset="55%" stopColor="#22c55e" />
-            <stop offset="100%" stopColor="#15803d" />
+            <stop offset="0%" className="[stop-color:theme(colors.brand.600)]" />
+            <stop offset="55%" className="[stop-color:theme(colors.brand.700)]" />
+            <stop offset="100%" className="[stop-color:theme(colors.brand.800)]" />
           </linearGradient>
         </defs>
         <text x="0" y="160" fontSize="212" textLength="1000" lengthAdjust="spacingAndGlyphs">
@@ -72,10 +74,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-gray-950 text-white">
-      <div aria-hidden className="h-px bg-gradient-to-r from-transparent via-amber-400/70 to-transparent" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 w-[36rem] h-[36rem] rounded-full bg-amber-500/10 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-green-500/10 blur-3xl" />
+    <footer className="relative overflow-hidden bg-gold-50 text-gray-900 border-t border-gold-200">
+      <div aria-hidden className="h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 w-[36rem] h-[36rem] rounded-full bg-gold-200/40 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-brand-100/60 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Link columns */}
@@ -110,20 +112,20 @@ export default function Footer() {
             <h3 className={heading}>{t.menuContact}</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-0.5 shrink-0 text-green-400" />
-                <span className="text-[15px] text-gray-200">
+                <MapPin className="w-5 h-5 mt-0.5 shrink-0 text-brand-700" />
+                <span className="text-[15px] text-gray-800">
                   <span className="block font-medium">{t.location1}</span>
-                  <span className="text-gray-400">Gottlieb-Dunkel-Str. 43, 12099 Berlin</span>
+                  <span className="text-gray-600">Gottlieb-Dunkel-Str. 43, 12099 Berlin</span>
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 shrink-0 text-green-400" />
+                <Phone className="w-5 h-5 shrink-0 text-brand-700" />
                 <a href="tel:+493061291653" className={link}>
                   +49 (0) 30 6129 1653
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 shrink-0 text-green-400" />
+                <Mail className="w-5 h-5 shrink-0 text-brand-700" />
                 <a href="mailto:info@deutpak.com" className={link}>
                   info@deutpak.com
                 </a>
@@ -133,12 +135,12 @@ export default function Footer() {
 
           <div className="col-span-2 sm:col-span-1 lg:col-span-4">
             <h3 className={heading}>{t.footerDigitalHeading}</h3>
-            <p className="text-[15px] text-gray-400 leading-relaxed mb-5">{t.footerDigitalText}</p>
+            <p className="text-[15px] text-gray-600 leading-relaxed mb-5">{t.footerDigitalText}</p>
             <a
               href="https://deutpakdigital.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-[15px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+              className="group inline-flex items-center gap-1.5 text-[15px] font-semibold text-cyan-700 hover:text-cyan-800 transition-colors"
             >
               <span>{t.footerDigitalBtn}</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -147,7 +149,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-8 border-t border-white/10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div className="py-8 border-t border-gray-900/10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="flex flex-wrap gap-2">
             {socials.map((social) => (
               <a
@@ -156,9 +158,15 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.name}
-                className="w-10 h-10 rounded-full bg-white/5 ring-1 ring-white/10 hover:bg-green-600 hover:ring-green-500 hover:-translate-y-0.5 flex items-center justify-center p-2.5 transition-all"
+                className="group w-10 h-10 rounded-full bg-white ring-1 ring-gray-200 shadow-sm hover:bg-brand-700 hover:ring-brand-700 hover:-translate-y-0.5 flex items-center justify-center p-2.5 transition-all"
               >
-                <Image src={social.icon} alt="" width={20} height={20} className="w-full h-full object-contain brightness-0 invert" />
+                <Image
+                  src={social.icon}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="w-full h-full object-contain brightness-0 opacity-80 group-hover:invert group-hover:opacity-100 transition"
+                />
               </a>
             ))}
           </div>
@@ -172,7 +180,7 @@ export default function Footer() {
                   onClick={() => setLanguage(code)}
                   aria-pressed={language === code}
                   className={`px-3 py-1 rounded-full font-medium transition-colors ${
-                    language === code ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"
+                    language === code ? "bg-brand-700 text-white" : "text-gray-600 hover:text-brand-700"
                   }`}
                 >
                   {label}
