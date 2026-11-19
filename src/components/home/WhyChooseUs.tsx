@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Award, Car, Handshake, Headset, Settings2, TrendingUp, Wrench } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInView } from "@/hooks/useInView";
+import PageGlow from "./PageGlow";
 import { SectionBadge, cardText, cardTitle, sectionBody, sectionLead, sectionTitle } from "./SectionHeading";
 
 /**
@@ -48,14 +49,16 @@ function PartnershipModel() {
   return (
     <div
       ref={ref}
-      className="mt-12 rounded-3xl border border-brand-100 bg-gradient-to-r from-brand-50 via-white to-gold-50 p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12"
+      // Label on its own line above the steps; the steps sit in one row only on large screens, where the
+      // (longer) German labels have room, and stack on smaller screens.
+      className="mt-12 rounded-3xl border border-brand-100 bg-gradient-to-r from-brand-50 via-white to-gold-50 p-6 sm:p-8 flex flex-col items-center gap-6"
     >
-      <span className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-brand-700">{t.whyChooseModelBadge}</span>
-      <ol className="flex-1 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-0">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-700 text-center">{t.whyChooseModelBadge}</span>
+      <ol className="w-full flex flex-col items-center lg:flex-row gap-4 lg:gap-0">
         {steps.map(({ icon: Icon, label }, i) => (
           <Fragment key={label}>
             {i > 0 && (
-              <li aria-hidden className="hidden sm:block flex-1 mx-4 h-px bg-gray-200 overflow-hidden">
+              <li aria-hidden className="hidden lg:block flex-1 min-w-8 mx-4 h-px bg-gray-200 overflow-hidden">
                 <span
                   style={{ transitionDelay: `${i * 300}ms` }}
                   className={`block h-full bg-gradient-to-r from-brand-600 to-gold-400 origin-left transition-transform duration-700 ease-out motion-reduce:transition-none ${
@@ -114,18 +117,17 @@ export default function WhyChooseUs() {
   const paused = hovered || focused || !showcaseInView;
 
   return (
-    <section id="aboutUs" className="relative overflow-hidden bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-b border-gray-100 scroll-mt-16">
-      <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-brand-100/60 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 w-[28rem] h-[28rem] rounded-full bg-gold-100/60 blur-3xl" />
-
+    <section id="aboutUs" className="relative py-24 lg:py-32 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+      <PageGlow side="right" color="green" align="inside-top" />
+      <PageGlow side="left" color="gold" align="middle" />
       <div className="relative max-w-7xl mx-auto">
         {/* Intro */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 lg:items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center text-center">
           <Reveal>
             <SectionBadge>{t.aboutBadge}</SectionBadge>
             <h2 className={sectionTitle}>{t.whyChooseDeutPakHeader}</h2>
           </Reveal>
-          <Reveal delay={120} className="space-y-4">
+          <Reveal delay={120} className="space-y-4 max-w-2xl mx-auto">
             <p className={sectionLead}>{t.whyChooseDeutPakSubHeader}</p>
             <p className={sectionBody}>{t.whyChooseDeutPakSubHeader2}</p>
           </Reveal>
@@ -154,8 +156,8 @@ export default function WhyChooseUs() {
                 return (
                   <li
                     key={i}
-                    className={`relative rounded-2xl transition-all duration-500 ${
-                      isActive ? "bg-white shadow-xl shadow-gray-200/70 ring-1 ring-gray-200" : "hover:bg-gray-50"
+                    className={`relative rounded-2xl bg-white bg-gradient-to-tr from-brand-700/25 via-white via-50% to-gold-400/60 ring-1 ring-gray-200/80 transition-all duration-500 ${
+                      isActive ? "shadow-xl shadow-gray-300/70" : "shadow-sm hover:shadow-md"
                     }`}
                   >
                     <h3>
@@ -164,22 +166,25 @@ export default function WhyChooseUs() {
                         onClick={() => setActive(i)}
                         aria-expanded={isActive}
                         aria-controls={panelId}
-                        className="w-full flex items-center gap-4 p-5 text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                        className={`w-full flex items-center gap-4 px-5 pt-5 text-left rounded-2xl transition-[padding] duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+                          isActive ? "pb-3 sm:pb-1" : "pb-5"
+                        }`}
                       >
-                        <span
-                          className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                            isActive ? "bg-brand-700 text-white scale-105 shadow-lg shadow-brand-700/30" : "bg-gray-100 text-gray-500"
-                          }`}
-                        >
-                          <Icon className="w-5 h-5" />
-                        </span>
-                        <span className="flex-1">
-                          <span className={`block text-xs font-bold tracking-widest mb-0.5 transition-colors ${isActive ? "text-gold-600" : "text-gray-400"}`}>
+                        {/* Number above the icon, nudged down a little from the row's centre. */}
+                        <span className="shrink-0 flex flex-col items-center gap-1.5 translate-y-2">
+                          <span className={`text-sm font-bold tracking-widest transition-colors ${isActive ? "text-gold-600" : "text-gray-400"}`}>
                             {String(i + 1).padStart(2, "0")}
                           </span>
-                          <span className={`block ${cardTitle} transition-colors ${isActive ? "text-gray-900" : "text-gray-600"}`}>
-                            {title}
+                          <span
+                            className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                              isActive ? "bg-brand-700 text-white scale-105 shadow-lg shadow-brand-700/30" : "bg-white/80 ring-1 ring-gray-100 text-gray-500"
+                            }`}
+                          >
+                            <Icon className="w-5 h-5" />
                           </span>
+                        </span>
+                        <span className={`flex-1 text-center ${cardTitle} transition-colors ${isActive ? "text-gray-900" : "text-gray-600"}`}>
+                          {title}
                         </span>
                       </button>
                     </h3>
@@ -190,7 +195,7 @@ export default function WhyChooseUs() {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <p className={`px-5 pb-5 sm:pl-[5.25rem] ${cardText}`}>{description}</p>
+                        <p className={`px-5 pb-5 sm:pl-[5.25rem] text-center ${cardText}`}>{description}</p>
                         <div className="mx-5 mb-4 h-1 rounded-full bg-gray-100 overflow-hidden">
                           {isActive &&
                             (autoplay ? (

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInView } from "@/hooks/useInView";
+import PageGlow from "./PageGlow";
 import { SectionBadge, sectionLead, sectionTitle } from "./SectionHeading";
 
 type Item = { src: string; caption: string; span: string };
@@ -171,8 +172,9 @@ export default function Gallery() {
     }`;
 
   return (
-    <section id="gallery" className="relative bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 scroll-mt-16">
-      <div className="max-w-7xl mx-auto">
+    <section id="gallery" className="relative py-24 lg:py-32 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+      <PageGlow side="left" color="gold" />
+      <div className="relative max-w-7xl mx-auto">
         <div ref={headerRef} className={`max-w-3xl mx-auto text-center mb-12 lg:mb-16 ${reveal(headerInView)}`}>
           <SectionBadge>{t.galleryBadge}</SectionBadge>
           <h2 className={`${sectionTitle} mb-4`}>{t.galleryHeader}</h2>

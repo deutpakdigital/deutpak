@@ -16,7 +16,7 @@ export default function Hero() {
       title: t.heroB2BService1Title,
       description: t.heroB2BService1Desc,
       tag: t.heroTag1,
-      iconBg: "bg-green-500/10 text-green-500",
+      iconBg: "bg-brand-700/10 text-brand-700",
     },
     {
       icon: Truck,
@@ -24,7 +24,7 @@ export default function Hero() {
       title: t.heroB2BService2Title,
       description: t.heroB2BService2Desc,
       tag: t.heroTag2,
-      iconBg: "bg-yellow-500/10 text-yellow-500",
+      iconBg: "bg-gold-400/20 text-gold-700",
     },
     {
       icon: ShieldCheck,
@@ -32,7 +32,7 @@ export default function Hero() {
       title: t.heroB2BService3Title,
       description: t.heroB2BService3Desc,
       tag: t.heroTag3,
-      iconBg: "bg-red-500/10 text-red-500",
+      iconBg: "bg-brand-700/10 text-brand-700",
     },
   ];
 
@@ -84,24 +84,24 @@ export default function Hero() {
             {services.map(({ icon: Icon, ...service }) => (
               <div
                 key={service.number}
-                className="relative group bg-gray-800/85 hover:bg-gray-800 border border-gray-700/70 hover:border-gray-600 rounded-xl p-4 lg:p-5 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between text-center"
+                className="relative group bg-white bg-gradient-to-tr from-brand-700/25 via-white via-50% to-gold-400/60 border border-white/70 rounded-xl p-4 lg:p-5 shadow-lg shadow-black/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 flex flex-col justify-between text-center"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${service.iconBg}`}>
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-2xl font-black text-gray-700 group-hover:text-gray-500 transition-colors">
+                    <span className="text-2xl font-black text-gold-600 group-hover:text-gold-700 transition-colors">
                       {service.number}
                     </span>
                   </div>
-                  <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-1">
+                  <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-gray-500 mb-1">
                     {service.tag}
                   </span>
-                  <h3 className="text-base font-bold text-white mb-1.5 leading-snug group-hover:text-green-400 transition-colors">
+                  <h3 className="text-base font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-brand-700 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3 md:line-clamp-none">
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3 md:line-clamp-none">
                     {service.description}
                   </p>
                 </div>
