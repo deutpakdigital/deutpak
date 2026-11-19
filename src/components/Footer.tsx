@@ -76,8 +76,8 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-gold-50 text-gray-900 border-t border-gold-200">
       <div aria-hidden className="h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 w-[36rem] h-[36rem] rounded-full bg-gold-200/40 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-brand-100/60 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 w-[36rem] h-[36rem] rounded-full bg-gold-200/80 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-brand-200/70 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Link columns */}

@@ -2,6 +2,7 @@
 
 import { ChartColumn, CircleCheck, CirclePlay, FileSpreadsheet, Search } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import PageGlow from "./PageGlow";
 import { SectionBadge, cardEyebrow, cardText, cardTitle, sectionLead, sectionTitle } from "./SectionHeading";
 
 // Step badges alternate between the two logo colours.
@@ -19,8 +20,9 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section id="howTo" className="py-24 lg:py-32 bg-gray-50 border-b border-gray-100 scroll-mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="howTo" className="relative py-24 lg:py-32 scroll-mt-16">
+      <PageGlow side="right" color="green" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
           <SectionBadge>{t.howItWorksBadge}</SectionBadge>
           <h2 className={`${sectionTitle} mb-4`}>{t.howItWorksHeader}</h2>
@@ -31,18 +33,18 @@ export default function HowItWorks() {
           {steps.map(({ icon: Icon, ...step }) => (
             <div
               key={step.number}
-              className="relative bg-white rounded-2xl p-7 border border-gray-200/80 shadow-sm hover:shadow-xl hover:border-brand-100 transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between text-center group"
+              className="relative bg-white bg-gradient-to-tr from-brand-700/25 via-white via-50% to-gold-400/60 rounded-2xl p-7 border border-gray-200/80 shadow-sm hover:shadow-xl hover:border-brand-100 transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between text-center group"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${step.badgeColor}`}>
                     {t.step} {Number(step.number)}
                   </span>
-                  <span className="text-2xl font-black text-gray-300 group-hover:text-gold-400 transition-colors">
+                  <span className="text-2xl font-black text-gold-600 group-hover:text-gold-700 transition-colors">
                     {step.number}
                   </span>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-800 mx-auto mb-5 group-hover:bg-brand-50 group-hover:border-brand-100 group-hover:text-brand-700 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-white/80 border border-gray-100 flex items-center justify-center text-gray-800 mx-auto mb-5 group-hover:bg-brand-50 group-hover:border-brand-100 group-hover:text-brand-700 transition-colors">
                   <Icon className="w-6 h-6" />
                 </div>
                 <span className={`${cardEyebrow} block mb-2`}>{step.tag}</span>

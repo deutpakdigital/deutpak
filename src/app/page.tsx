@@ -13,9 +13,12 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
-        <WhyChooseUs />
-        <HowItWorks />
-        <Gallery />
+        {/* Keeps the section glows (see PageGlow) behind the content and clips them at the screen edges. */}
+        <div className="relative isolate overflow-hidden bg-white">
+          <WhyChooseUs />
+          <HowItWorks />
+          <Gallery />
+        </div>
         <Footer />
       </main>
     </div>
