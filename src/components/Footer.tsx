@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useInView } from "@/hooks/useInView";
 import type { Language } from "@/lib/translations";
 
 const socials = [
@@ -23,41 +22,6 @@ const languages: { code: Language; label: string }[] = [
 
 const heading = "text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 mb-6";
 const link = "text-[15px] font-medium text-gray-800 hover:text-brand-700 transition-colors";
-
-/** Full-width "DEUTPAK" wordmark: gold "DEUT", green "PAK", in the logo colours used across the app. */
-function Wordmark() {
-  // It sits at the very bottom of the page, so it can only ever reach the bottom edge of the viewport.
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1, rootMargin: "0px" });
-  return (
-    <div ref={ref} aria-hidden className="relative overflow-hidden select-none">
-      {/* The letters run from y≈6 to the baseline at y=160; a viewBox 140 tall cuts off roughly their bottom eighth,
-          so the word looks like it sinks below the bottom edge of the page. */}
-      <svg
-        viewBox="0 0 1000 140"
-        className={`block w-full h-auto font-sans font-black transition-all duration-1000 ease-out motion-reduce:transition-none motion-reduce:translate-y-0 motion-reduce:opacity-100 ${
-          inView ? "translate-y-0 opacity-100" : "translate-y-1/3 opacity-0"
-        }`}
-      >
-        <defs>
-          <linearGradient id="wordmark-gold" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:theme(colors.gold.300)]" />
-            <stop offset="55%" className="[stop-color:theme(colors.gold.400)]" />
-            <stop offset="100%" className="[stop-color:theme(colors.gold.600)]" />
-          </linearGradient>
-          <linearGradient id="wordmark-green" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:theme(colors.brand.600)]" />
-            <stop offset="55%" className="[stop-color:theme(colors.brand.700)]" />
-            <stop offset="100%" className="[stop-color:theme(colors.brand.800)]" />
-          </linearGradient>
-        </defs>
-        <text x="0" y="160" fontSize="212" textLength="1000" lengthAdjust="spacingAndGlyphs">
-          <tspan fill="url(#wordmark-gold)">DEUT</tspan>
-          <tspan fill="url(#wordmark-green)">PAK</tspan>
-        </text>
-      </svg>
-    </div>
-  );
-}
 
 export default function Footer() {
   const { t, language, setLanguage } = useLanguage();
@@ -133,7 +97,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="col-span-2 sm:col-span-1 lg:col-span-4">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-4 text-center">
             <h3 className={heading}>{t.footerDigitalHeading}</h3>
             <p className="text-[15px] text-gray-600 leading-relaxed mb-5">{t.footerDigitalText}</p>
             <a
@@ -194,7 +158,6 @@ export default function Footer() {
           </div>
         </div>
 
-        <Wordmark />
       </div>
     </footer>
   );
