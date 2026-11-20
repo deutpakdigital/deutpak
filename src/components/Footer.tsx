@@ -45,7 +45,7 @@ export default function Footer() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Link columns */}
-        <div className="pt-20 pb-14 grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 text-center">
+        <div className="pt-20 pb-14 grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
           <div className="lg:col-span-2">
             <h3 className={heading}>{t.menuQuickLinks}</h3>
             <ul className="space-y-4">
@@ -75,20 +75,20 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1 lg:col-span-4">
             <h3 className={heading}>{t.menuContact}</h3>
             <ul className="space-y-4">
-              <li className="flex items-start justify-center gap-3">
+              <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 shrink-0 text-brand-700" />
                 <span className="text-[15px] text-gray-800">
                   <span className="block font-medium">{t.location1}</span>
                   <span className="text-gray-600">Gottlieb-Dunkel-Str. 43, 12099 Berlin</span>
                 </span>
               </li>
-              <li className="flex items-center justify-center gap-3">
+              <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 shrink-0 text-brand-700" />
                 <a href="tel:+493061291653" className={link}>
                   +49 (0) 30 6129 1653
                 </a>
               </li>
-              <li className="flex items-center justify-center gap-3">
+              <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 shrink-0 text-brand-700" />
                 <a href="mailto:info@deutpak.com" className={link}>
                   info@deutpak.com
@@ -97,7 +97,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="col-span-2 sm:col-span-1 lg:col-span-4">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-4 text-center">
             <h3 className={heading}>{t.footerDigitalHeading}</h3>
             <p className="text-[15px] text-gray-600 leading-relaxed mb-5">{t.footerDigitalText}</p>
             <a
