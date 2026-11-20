@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useInView } from "@/hooks/useInView";
 import type { Language } from "@/lib/translations";
 
 const socials = [
@@ -23,41 +22,6 @@ const languages: { code: Language; label: string }[] = [
 
 const heading = "text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 mb-6";
 const link = "text-[15px] font-medium text-gray-800 hover:text-brand-700 transition-colors";
-
-/** Full-width "DEUTPAK" wordmark: gold "DEUT", green "PAK", in the logo colours used across the app. */
-function Wordmark() {
-  // It sits at the very bottom of the page, so it can only ever reach the bottom edge of the viewport.
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1, rootMargin: "0px" });
-  return (
-    <div ref={ref} aria-hidden className="relative overflow-hidden select-none">
-      {/* The letters run from y≈6 to the baseline at y=160; a viewBox 140 tall cuts off roughly their bottom eighth,
-          so the word looks like it sinks below the bottom edge of the page. */}
-      <svg
-        viewBox="0 0 1000 140"
-        className={`block w-full h-auto font-sans font-black transition-all duration-1000 ease-out motion-reduce:transition-none motion-reduce:translate-y-0 motion-reduce:opacity-100 ${
-          inView ? "translate-y-0 opacity-100" : "translate-y-1/3 opacity-0"
-        }`}
-      >
-        <defs>
-          <linearGradient id="wordmark-gold" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:theme(colors.gold.300)]" />
-            <stop offset="55%" className="[stop-color:theme(colors.gold.400)]" />
-            <stop offset="100%" className="[stop-color:theme(colors.gold.600)]" />
-          </linearGradient>
-          <linearGradient id="wordmark-green" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:theme(colors.brand.600)]" />
-            <stop offset="55%" className="[stop-color:theme(colors.brand.700)]" />
-            <stop offset="100%" className="[stop-color:theme(colors.brand.800)]" />
-          </linearGradient>
-        </defs>
-        <text x="0" y="160" fontSize="212" textLength="1000" lengthAdjust="spacingAndGlyphs">
-          <tspan fill="url(#wordmark-gold)">DEUT</tspan>
-          <tspan fill="url(#wordmark-green)">PAK</tspan>
-        </text>
-      </svg>
-    </div>
-  );
-}
 
 export default function Footer() {
   const { t, language, setLanguage } = useLanguage();
@@ -81,7 +45,7 @@ export default function Footer() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Link columns */}
-        <div className="pt-20 pb-14 grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
+        <div className="pt-20 pb-14 grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 text-center">
           <div className="lg:col-span-2">
             <h3 className={heading}>{t.menuQuickLinks}</h3>
             <ul className="space-y-4">
@@ -111,20 +75,20 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1 lg:col-span-4">
             <h3 className={heading}>{t.menuContact}</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
+              <li className="flex items-start justify-center gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 shrink-0 text-brand-700" />
                 <span className="text-[15px] text-gray-800">
                   <span className="block font-medium">{t.location1}</span>
                   <span className="text-gray-600">Gottlieb-Dunkel-Str. 43, 12099 Berlin</span>
                 </span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center justify-center gap-3">
                 <Phone className="w-5 h-5 shrink-0 text-brand-700" />
                 <a href="tel:+493061291653" className={link}>
                   +49 (0) 30 6129 1653
                 </a>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center justify-center gap-3">
                 <Mail className="w-5 h-5 shrink-0 text-brand-700" />
                 <a href="mailto:info@deutpak.com" className={link}>
                   info@deutpak.com
@@ -194,7 +158,6 @@ export default function Footer() {
           </div>
         </div>
 
-        <Wordmark />
       </div>
     </footer>
   );
